@@ -1,5 +1,7 @@
 # SolveBio Julia Client
 
+[![Build Status](https://travis-ci.org/adelq/SolveBio.jl.svg?branch=master)](https://travis-ci.org/adelq/SolveBio.jl)
+
 This is the SolveBio Julia package.
 
 ## Installation
