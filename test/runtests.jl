@@ -1,4 +1,4 @@
 using SolveBio
 using Base.Test
 
-@test 1 == 1
+@test SolveBio.login()["is_active"]

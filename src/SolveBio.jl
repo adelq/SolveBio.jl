@@ -1,6 +1,8 @@
 module SolveBio
 using Requests
 
+include("utils.jl")
+
 API_HOST = get(ENV, "SOLVEBIO_API_HOST", "https://api.solvebio.com/")
 API_KEY = get(ENV, "SOLVEBIO_API_KEY", "")
 PKG_VERSION = v"0.0.1"
@@ -9,7 +11,7 @@ function login(api_key=API_KEY, api_host=API_HOST)
     # TODO: log in manually with username and password
     try
         res = request("GET", "v1/user")
-        println("Logged in to $api_host as $email.")
+        println("Logged in to $api_host as $(res["email"]).")
         return res
     catch e
         println("Login failed: $e")
@@ -20,11 +22,10 @@ function request(method, path, query=Dict(), body=Dict(), args...)
     headers = {
         "Accept" => "application/json",
         "Content-Type" => "application/json",
-        "Accept-Encoding" => "gzip,deflate"
     }
 
     if API_KEY != ""
-        headers["Authorization"] = "Token $api_key"
+        headers["Authorization"] = "Token $API_KEY"
     end
 
     # Slice of beginning slash
@@ -34,7 +35,6 @@ function request(method, path, query=Dict(), body=Dict(), args...)
 
     useragent = "SolveBio Julia Client $PKG_VERSION [$VERSION $(Sys.MACHINE)]"
     headers["User-Agent"] = useragent
-    println(headers)
 
     uri = "$API_HOST$path"
 
@@ -54,6 +54,7 @@ function request(method, path, query=Dict(), body=Dict(), args...)
         if res.status == 429
             error("API error: Too many requests, please retry in $(res.headers["retry-after"]) seconds")
         elseif res.status == 400
+            content = formatSolveBioResponse(res, raw=false)
             error("API error: $(res.data)")
         else
             error("API error: $(res.status)")
@@ -63,6 +64,9 @@ function request(method, path, query=Dict(), body=Dict(), args...)
     if (res.status == 204 || res.status == 301 || res.status == 302)
         return res
     end
+
+    res = formatSolveBioResponse(res)
+    return res
 end
 
 end
