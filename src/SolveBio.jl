@@ -3,6 +3,7 @@ using Requests
 
 include("utils.jl")
 include("depository.jl")
+include("dataset.jl")
 
 API_HOST = get(ENV, "SOLVEBIO_API_HOST", "https://api.solvebio.com/")
 API_KEY = get(ENV, "SOLVEBIO_API_KEY", "")
