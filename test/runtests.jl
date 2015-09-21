@@ -17,7 +17,6 @@ println("Successfully ran all depository tests")
 println("Running dataset tests...")
 @test SolveBio.Dataset.list()["total"] > 200
 ds = SolveBio.Dataset.get("ClinVar/ClinVar")
-@test ds["created_at"] == "2015-07-16T23:07:02Z"
 @test ds["depository"] == "ClinVar"
 @test ds["name"] == "ClinVar"
 @test ds["documents_count"] > 1e5
