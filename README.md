@@ -4,6 +4,8 @@
 
 This is the SolveBio Julia package.
 
+For more information about SolveBio, visit [solvebio.com](https://www.solvebio.com).
+
 ## Installation
 
 ```julia
