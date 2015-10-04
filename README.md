@@ -14,6 +14,4 @@ Pkg.clone("https://github.com/adelq/SolveBio.jl.git")
 
 ## License
 
-SolveBio.jl is licensed under the GPLv3 license. If you would like an
-individualized license, please contact the author of this package (Adel
-Qalieh).
+SolveBio.jl is now licensed under the MIT License.

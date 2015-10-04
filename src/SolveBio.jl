@@ -7,7 +7,7 @@ include("dataset.jl")
 
 API_HOST = get(ENV, "SOLVEBIO_API_HOST", "https://api.solvebio.com/")
 API_KEY = get(ENV, "SOLVEBIO_API_KEY", "")
-PKG_VERSION = v"0.0.1"
+PKG_VERSION = v"0.0.2"
 
 function login(api_key=API_KEY, api_host=API_HOST)
     # TODO: log in manually with username and password
